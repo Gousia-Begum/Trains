@@ -1,0 +1,59 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Image",
+              "style": "Person",
+              "url": "https://cfc89f10.ngrok.io/Resources/train.jpg",
+              "size": "Small"
+            }
+          ],
+          "width": "auto"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "Bolder",
+              "text": "Train ID: ICE 611",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "Model: ICE4",
+              "wrap": true
+            }
+          ],
+          "width": "stretch"
+        }
+      ]
+    },
+    {
+      "type": "FactSet",
+      "facts": [
+        {
+          "title": "Base location",
+          "value": "Munich"
+        },
+        {
+          "title": "Capacity",
+          "value": "second class 627 seats, first class 205 seats"
+        },
+        {
+          "title": "Train type",
+          "value": "ICE4, Configuration K4s"
+        }
+      ]
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.0"
+}

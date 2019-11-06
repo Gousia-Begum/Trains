@@ -1,0 +1,88 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Image",
+              "style": "Person",
+              "url": "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg",
+              "size": "Small"
+            }
+          ],
+          "width": "auto"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "Bolder",
+              "text": "Paul Graf",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "Train:ICE 1008 Seat Catriage 39 Seat 61",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Special Instructions: Wheelchair required.",
+              "id": "new text",
+              "spacing": "Small",
+              "horizontalAlignment": "Left",
+              "size": "Small",
+              "weight": "Lighter"
+            }
+          ],
+          "width": "stretch"
+        }
+      ]
+    },
+    {
+      "type": "FactSet",
+      "facts": [
+        {
+          "title": "From",
+          "value": "Munich HBF"
+        },
+        {
+          "title": "To",
+          "value": "Berlin HBF"
+        },
+        {
+          "title": "Date",
+          "value": "06 Nov 19"
+        },
+        {
+          "title": "Class",
+          "value": "first class"
+        },
+        {
+          "title": "Order Number",
+          "value": "UZ2UM3"
+        },
+        {
+          "title": "Reservation Nr.",
+          "value": "8013 5009 3517 17"
+        },
+        {
+          "title": "Bahncard",
+          "value": "BC50, 1 Class"
+        },
+        {
+          "title": "Loyalty Program",
+          "value": "Bahn. bonus comfort"
+        }
+      ]
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.0"
+}

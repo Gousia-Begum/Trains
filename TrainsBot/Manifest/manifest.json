@@ -1,0 +1,115 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.3/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.3",
+  "version": "1.0.0",
+  "id": "b1c6ce36-f512-4b8d-bc4f-b1e7ae866b37",
+  "packageName": "com.contoso.helloworld",
+  "developer": {
+    "name": "Contoso",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Trains Bot",
+    "full": "Trains App for Microsoft Teams"
+  },
+  "description": {
+    "short": "Trains App for Microsoft Teams",
+    "full": "This sample app provides a very simple app for Microsoft Teams. You can extend this to add more content and capabilities."
+  },
+  "icons": {
+    "outline": "contoso20x20.png",
+    "color": "contoso96x96.png"
+  },
+  "accentColor": "#60A18E",
+  "staticTabs": [
+    {
+      "entityId": "com.contoso.helloworld.hellotab",
+      "name": "Hello Tab",
+      "contentUrl": "https://ec5500f1.ngrok.io/simple",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  
+  "bots": [
+    {
+      "botId": "b1c6ce36-f545-4b8d-bc4f-b1e7ae866b37",
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "scopes": [
+        "team",
+        "personal"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "team",
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "get special assistance card",
+              "description": "get special assistance card"
+            },
+            {
+              "title": "get normal passenger card",
+              "description": "get normal passenger card"
+            },
+            {
+              "title": "get available trains card",
+              "description": "get available trains card"
+            },
+            {
+              "title": "getrefreshmentscard",
+              "description": "getrefreshmentscard"
+            }
+          ]
+        }
+
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "b1c6ce36-f545-4b8d-bc4f-b1e7ae866b37",
+      "commands": [
+        {
+          "id": "getStudents",
+          "description": "Gets some random students name and images that you can insert in messages for fun.",
+          "title": "Students",
+          "initialRun": true,
+          "parameters": [
+            {
+              "name": "cardTitle",
+              "description": "Search students",
+              "title": "Card title"
+            }
+          ]
+        },
+        {
+          "id": "getTeachers",
+          "description": "Gets some random teachers name and images that you can insert in messages for fun.",
+          "title": "Teachers",
+          "initialRun": true,
+          "parameters": [
+            {
+              "name": "cardTitle",
+              "description": "Search teachers",
+              "title": "Card title"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok.io"
+  ]
+}
