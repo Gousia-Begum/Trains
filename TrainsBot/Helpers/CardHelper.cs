@@ -24,7 +24,85 @@ namespace TrainsBot.Helpers
 
             };
         }
+        public static Attachment GetWelcomeScreen()
+        {
+            var card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
+            {
+                Body = new List<AdaptiveElement>()
+                {
+                    new AdaptiveContainer()
+                    {
+                        Items=new List<AdaptiveElement>()
+                        {
+                            new AdaptiveTextBlock()
+                            {
+                                Text="Welcome to Railways Bot",
+                                Spacing=AdaptiveSpacing.None,
+                                Size=AdaptiveTextSize.Large,
+                                Weight=AdaptiveTextWeight.Bolder
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text="Please select the type of notification you want to send",
+                                Id="txt1",
+                                Separator=true
+                            },
+                            new AdaptiveChoiceSetInput()
+                            {
+                                Id="choices",
+                                Choices=new List<AdaptiveChoice>()
+                                {
+                                    
+                                    new AdaptiveChoice()
+                                    {
+                                        Title="get special assistance card",
+                                        
+                                        Value="get special assistance card"
+                                    },
+                                    new AdaptiveChoice()
+                                    {
+                                        Title="get normal passenger card",
+                                        Value="get normal passenger card"
+                                    },
+                                    new AdaptiveChoice()
+                                    {
+                                        Title="get available trains card",
+                                        Value="get available trains card"
+                                    },
+                                    new AdaptiveChoice()
+                                    {
+                                        Title="getrefreshmentscard",
+                                        Value="getrefreshmentscard"
+                                    }
 
+                                },
+                                Style=AdaptiveChoiceInputStyle.Compact,
+                                Value=""
+                            },
+                            new AdaptiveTextInput()
+                            {
+                                Placeholder="Enter channel id here",
+                                Id="channelId",
+                                Value=""
+                            }
+                        }
+                    }
+                },
+                Actions=new List<AdaptiveAction>()
+                {
+                    new AdaptiveSubmitAction()
+                    {
+                        Title="Send Notification",
+                        Data=new ActionDetails(){ActionType=Constants.SendNotification}
+                    }
+                }
+            };
+            return new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card
+            };
+        }
         public static String GetAdaptiveCardJson(string filenumber)
         {
             var path = System.Web.Hosting.HostingEnvironment.MapPath(@"~/Cards/" + filenumber + ".json");

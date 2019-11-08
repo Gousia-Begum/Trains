@@ -239,6 +239,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Manifest\contoso20x20.png" />
     <Content Include="Manifest\contoso96x96.png" />
+    <Content Include="Resources\AlexW.jpg" />
+    <Content Include="Resources\order.jpg" />
     <Content Include="Resources\tea.jpg" />
     <Content Include="Resources\train.jpg" />
     <Content Include="Scripts\teamsapp.js" />
@@ -261,10 +263,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Manifest\manifest.json" />
-    <Content Include="Cards\1.json" />
-    <Content Include="Cards\2.json" />
-    <Content Include="Cards\3.json" />
-    <Content Include="Cards\4.json" />
+    <Content Include="Cards\specialassistance.json" />
+    <Content Include="Cards\normalpassenger.json" />
+    <Content Include="Cards\traindetails.json" />
+    <Content Include="Cards\refreshments.json" />
+    <Content Include="Cards\trainstatus.json" />
+    <Content Include="Cards\customerfeedback.json" />
+    <Content Include="Cards\MenuCard.json" />
+    <Content Include="Cards\Order.json" />
     <None Include="packages.config" />
     <Content Include="Views\Home\First.cshtml" />
     <Content Include="Views\Home\Second.cshtml" />

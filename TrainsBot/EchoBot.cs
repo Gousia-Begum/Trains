@@ -1,6 +1,7 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Teams;
+using Microsoft.Bot.Connector.Teams.Models;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using TrainsBot.Helpers;
 namespace TrainsBot
 {
     [Serializable]
-    public class EchoBot:IDialog<object>
+    public class EchoBot : IDialog<object>
     {
         public async Task StartAsync(IDialogContext context)
         {
@@ -27,10 +28,10 @@ namespace TrainsBot
                 switch (message.Trim())
                 {
                     case Constants.SpecialAssistance:
-                        card = CardHelper.GetAdaptiveCard("1");
+                        card = CardHelper.GetAdaptiveCard("specialassistance");
                         break;
                     case Constants.NormalPassenger:
-                        card = CardHelper.GetAdaptiveCard("2");
+                        card = CardHelper.GetAdaptiveCard("normalpassenger");
                         break;
                     case Constants.AvailableTrains:
                         card = CardHelper.GetAvailableTrainsCard();
@@ -38,19 +39,34 @@ namespace TrainsBot
                     case Constants.Refreshment:
                         card = CardHelper.GetAvailableRefreshments();
                         break;
-                   
+
                     case Constants.TrainDetails:
-                        
-                        card = CardHelper.GetAdaptiveCard("3");
+
+                        card = CardHelper.GetAdaptiveCard("traindetails");
                         break;
                     case Constants.GetRefreshmentItem:
-                        
-                        card = CardHelper.GetAdaptiveCard("4");
-                        break;
 
-                        //default:
-                        //    card = CardHelper.GetWelcomeScreen(userDetails.GivenName ?? userDetails.Name);
-                        //    break;
+                        card = CardHelper.GetAdaptiveCard("refreshments");
+                        break;
+                    case Constants.GetTrainStatusCard:
+
+                        card = CardHelper.GetAdaptiveCard("trainstatus");
+                        break;
+                    case Constants.GetCustomerfeedbackcard:
+
+                        card = CardHelper.GetAdaptiveCard("customerfeedback");
+                        break;
+                    case Constants.GetMenuCard:
+
+                        card = CardHelper.GetAdaptiveCard("MenuCard");
+                        break;
+                    case Constants.GetOrderDetails:
+
+                        card = CardHelper.GetAdaptiveCard("Order");
+                        break;
+                    default:
+                        card = CardHelper.GetWelcomeScreen();
+                        break;
                 }
 
                 var reply = context.MakeMessage();
@@ -68,30 +84,96 @@ namespace TrainsBot
         {
             ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
             var actionDetails = JsonConvert.DeserializeObject<ActionDetails>(activity.Value.ToString());
-           
-            var type = actionDetails.ActionType;
-
-            Attachment card = null;
-
-            switch (type)
+            if (actionDetails.channelId != null)
             {
-                case Constants.TrainDetails:
-                    var detailsreply = Activity.CreateMessageActivity();
-                    card = CardHelper.GetAdaptiveCard("2");
-                    detailsreply.Attachments.Add(card);
-                    await connector.Conversations.UpdateActivityAsync(activity.Conversation.Id, activity.ReplyToId, (Activity)detailsreply);
-                    break;
-                //case Constants.NextWeekRoster:
-                //    card = await CardHelper.GetWeeklyRosterCard(userDetails.UserPrincipalName);
-                //    break;
-                
-            }
 
-            var reply = context.MakeMessage();
-            reply.Attachments.Add(card);
-            await context.PostAsync(reply);
+                var type = actionDetails.ActionType;
+                var data = actionDetails.choices;
+
+                Attachment card = null;
+
+                switch (data)
+                {
+                    case Constants.SpecialAssistance:
+                        card = CardHelper.GetAdaptiveCard("specialassistance");
+                        break;
+                    case Constants.NormalPassenger:
+                        card = CardHelper.GetAdaptiveCard("normalpassenger");
+                        break;
+                    case Constants.AvailableTrains:
+                        card = CardHelper.GetAvailableTrainsCard();
+                        break;
+                    case Constants.Refreshment:
+                        card = CardHelper.GetAvailableRefreshments();
+                        break;
+
+                    case Constants.TrainDetails:
+                        card = CardHelper.GetAdaptiveCard("traindetails");
+                        break;
+                    case Constants.GetRefreshmentItem:
+
+                        card = CardHelper.GetAdaptiveCard("refreshments");
+                        break;
+                    case Constants.GetTrainStatusCard:
+
+                        card = CardHelper.GetAdaptiveCard("trainstatus");
+                        break;
+                    case Constants.GetCustomerfeedbackcard:
+
+                        card = CardHelper.GetAdaptiveCard("customerfeedback");
+                        break;
+                    case Constants.GetMenuCard:
+
+                        card = CardHelper.GetAdaptiveCard("MenuCard");
+                        break;
+                    case Constants.GetOrderDetails:
+
+                        card = CardHelper.GetAdaptiveCard("Order");
+                        break;
+
+                }
+                //call send notification and pass param
+                await SendNotification(activity, actionDetails.channelId, card);
+
+
+            }
             return;
         }
+
+        public static async Task<bool> SendNotification(Activity activity, string channelId, Attachment attachment)
+        {
+            // MicrosoftAppCredentials.TrustServiceUrl(activity.ServiceUrl);
+            using (var connectorClient = new ConnectorClient(new Uri("https://smba.trafficmanager.net/amer/")))
+            {
+                var message = Activity.CreateMessageActivity();
+                message.Attachments.Add(attachment);
+                var parameters = new ConversationParameters
+                {
+                    Bot = activity.Recipient,
+                    IsGroup = true,
+                    ChannelData = new TeamsChannelData
+                    {
+                        Channel = new ChannelInfo(channelId),
+                        Notification = new NotificationInfo() { Alert = true }
+                    },
+                    Activity = (Activity)message
+                };
+                // MicrosoftAppCredentials.TrustServiceUrl("https://canary.botapi.skype.com/amer/", DateTime.MaxValue);
+
+                try
+                {
+                    var response = await connectorClient.Conversations.CreateConversationAsync(parameters);
+                }
+                catch (Exception e)
+                {
+
+                    Console.WriteLine(e);
+                }
+                // await connectorClient.Conversations.SendToConversationAsync((Activity)message);
+                return true;
+            }
+        }
+
         public static async Task EchoMessage(ConnectorClient connector, Activity activity)
         {
             var reply = activity.CreateReply("You said: " + activity.GetTextWithoutMentions());
@@ -101,5 +183,9 @@ namespace TrainsBot
     public class ActionDetails
     {
         public string ActionType { get; set; }
+        public string channelId { get; set; }
+        public string choices { get; set; }
+
     }
+
 }

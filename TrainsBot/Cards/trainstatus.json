@@ -1,0 +1,138 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "Image",
+              "altText": "",
+              "url": "https://cfc89f10.ngrok.io/Resources/train.jpg"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Train Status"
+            },
+            {
+              "type": "TextBlock",
+              "text": "DELAYED - Infrastructure problems ",
+              "color": "Attention"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "separator": true,
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Train No.",
+              "weight": "Bolder"
+            },
+            {
+              "type": "TextBlock",
+              "text": "TSD872"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Scheduled Time",
+              "weight": "Bolder"
+            },
+            {
+              "type": "TextBlock",
+              "text": "10:10 AM",
+              "color": "Attention"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Expected Time",
+              "weight": "Bolder"
+            },
+            {
+              "type": "TextBlock",
+              "text": "11:45 AM",
+              "color": "Attention"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Munich HBF"
+            },
+            {
+              "type": "TextBlock",
+              "text": "MNC",
+              "color": "Accent"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "Image",
+              "altText": "",
+              "url": "https://cfc89f10.ngrok.io/Resources/train.jpg"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Berlin HBF"
+            },
+            {
+              "type": "TextBlock",
+              "text": "BLR",
+              "color": "BER"
+            }
+          ]
+        }
+      ],
+      "separator": true
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.0"
+}
